@@ -1,0 +1,23 @@
+Table: case
+case_id     case_name             coverage     date
+----------  ----------            ----------   -----------  
+ 11         Auto accident         30           2001-01-02 
+ 12         Fire accident         150          2000-03-10 
+ 13         Injury                30           2006-03-03 
+ 14         Fire accident         220          2001-01-02 
+ 15         Injury                10           2010-05-11 
+ 16         Auto accident         400          2007-01-01 
+
+
+ Table: customer
+customer_id  customer_name   city              case_id
+-----------  ------------    ----------      ----------
+2001         Thurman Thorn   New York               11
+2002         Sharda Clemens  San Francisco          12
+2003         Buck Elkins     New York               13
+2004         Fabian Johns    Boston                 15
+2005         Brad Cameron    Stanford               11
+2006         Sofia Roles     Boston                 16
+2007         Rory Pietila    New Haven              12
+
+
