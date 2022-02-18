@@ -9,15 +9,15 @@ case_id     case_name             coverage     date           customer_id
  16         Auto accident         400          2007-01-01     2006
 
 
- Table: customer
-customer_id  customer_name   city            age
------------  ------------    ----------      -------
-2001         Thurman Thorn   New York        55    
-2002         Sharda Clemens  San Francisco   37
-2003         Buck Elkins     New York        43
-2004         Fabian Johns    Boston          65
-2005         Brad Cameron    Stanford        61
-2006         Sofia Roles     Boston          27
-2007         Rory Pietila    New Haven       60
+Table: customer
+customer_id  customer_name     city            age
+-----------  ------------      ----------      -------
+2001         Thurman Thorn     New York        55    
+2002         Sharda Clemens    San Francisco   37
+2003         Buck Elkins       New York        43
+2004         Fabian Johns      Boston          65
+2005         Brad Cameron      Stanford        61
+2006         Sofia Roles       Boston          27
+2007         Rory Pietila      New Haven       60
 
 
