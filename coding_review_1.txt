@@ -1,0 +1,79 @@
+    public WebDriver driver;
+
+    public static void openBrowser() {
+
+        ConfigReader.readProperties(Constants.CONFIGURATION_FILEPATH);
+
+        switch (ConfigReader.getPropertyValue("browser")) {
+            case "chrome":
+                if (ConfigReader.getPropertyValue("headless").equals("true")) {
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.setHeadless(true);
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver(chromeOptions);
+                } else {
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver();
+                }
+                break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            case "safari":
+                WebDriverManager.safaridriver().setup();
+                driver = new SafariDriver();
+            default:
+                throw new RuntimeException("Invalid browser name");
+        }
+
+        driver.get(ConfigReader.getPropertyValue("url"));
+        driver.manage().timeouts().implicitlyWait(Constants.IMPLICIT_WAIT, TimeUnit.SECONDS);
+    }
+
+    public void admin_user_add_new_license(String licenseName) {
+        openBrowser();
+        driver.findElement(By.cssSelector("input#txtUsername")).sendKeys(ConfigReader.getPropertyValue("username"));
+        driver.findElement(By.cssSelector("input#txtPassword")).sendKeys(ConfigReader.getPropertyValue("password"));
+        driver.findElement(By.cssSelector("input#btnLogin")).click();
+
+        openBrowser();
+        DashBoardPage dp = new DashBoardPage();
+        click(dp.licenseOption);
+
+        List<WebElement> genderMale = driver.findElements(By.xpath("//label[text()='Male']/parent::span"));
+        for (WebElement gender : genderMale) {
+            String genderText = gender.getText();
+            if (genderText.equals("Male")) {
+                gender.click();
+            }
+        }
+
+        openBrowser();
+        AddLicensePage al = new AddLicensePage();
+        for (WebElement row: al.licenseTable) {
+            if (row.getText().contains(licenseName)) {
+                System.out.println("License "+licenseName+" is already exist in the list. Deleting this license in order to verify functionality of adding license");
+                click(driver.findElement(By.xpath("//a[text()='"+licenseName+"']/parent::td/preceding-sibling::td/input")));
+                click(al.deleteBtn);
+                break;
+            }
+        }
+        
+        Select selectLicense = new Select(licenseDD);
+        List<WebElement> listLicense = selectLicense.getOptions();
+        int sizeLicense = listLicense.size();
+        if (sizeLicense == 30) {
+            sendTextLicense(Constants.LICENSE_ERROR, "OK");
+        } else {
+            sendTextLicense(Constants.LICENSE_ERROR, "ERROR");
+        }
+
+        click(al.addLicenceButton);
+        sendText(al.licenseNameField, licenseName);
+        click(al.saveBtn);
+        Assert.assertTrue("License has not been added", al.successMessage.isDisplayed());
+        Assert.assertTrue("License has not been added", al.successMessage.getText().contains("Successfully Saved"));
+
+        closeBrowser();
+    }
