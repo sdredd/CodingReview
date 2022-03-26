@@ -1,23 +1,27 @@
 Table: case
 case_id     case_name             coverage     date           customer_id
 ----------  ----------            ----------   -----------    -------------
- 11         Auto accident         30           2001-01-02     2002
- 12         Fire accident         150          2000-03-10     2007
- 13         Injury                30           2006-03-03     2005
- 14         Fire accident         220          2001-01-02     2002
- 15         Injury                10           2010-05-11     2001
- 16         Auto accident         400          2007-01-01     2006
+ 11         Auto accident         30           2001-01-02     202
+ 12         Fire accident         150          2000-03-10     207
+ 13         Injury                30           2006-03-03     205
+ 14         Fire accident         220          2001-01-02     202
+ 15         Injury                10           2010-05-11     201
+ 16         Auto accident         400          2007-01-01     206
 
 
 Table: customer
 customer_id  customer_name     city            age
 -----------  ------------      ----------      -------
-2001         Thurman Thorn     New York        55    
-2002         Sharda Clemens    San Francisco   37
-2003         Buck Elkins       New York        43
-2004         Fabian Johns      Boston          65
-2005         Brad Cameron      Stanford        61
-2006         Sofia Roles       Boston          27
-2007         Rory Pietila      New Haven       60
+201          Thurman Thorn     New York        55    
+202          Sharda Clemens    San Francisco   37
+203          Buck Elkins       New York        43
+204          Fabian Johns      Boston          65
+205          Brad Cameron      Stanford        61
+206          Sofia Roles       Boston          27
+207          Rory Pietila      New Haven       60
 
+
+We have 2 tables. First includes cases, second includes customers. 
+We need to get the customer names, city and case's date of customers who have cases in the range 2000-2005 years 
+and who age more than 60. Pls write sql and explain.
 
